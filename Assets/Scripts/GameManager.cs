@@ -31,11 +31,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             PauseUnpause();
         }
-        if(Input.GetKeyDown(KeyCode.R)){
-            SceneManager.LoadScene( SceneManager.GetActiveScene().name );
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -98,6 +100,29 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
+    public IEnumerator LevelEndCo()
+    {
+        AudioManager.instance.PlayMusic(2);
+        PlayerController.instance.stopMove = true;
+
+        yield return new WaitForSeconds(2f);
+
+        UIManager.instance.fadeToBlack = true;
+
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Level Ended");
+
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Skeleton In Prison")
+        {
+            SceneManager.LoadScene("DanganMaze");
+        }
+        else if (scene.name == "DanganMaze")
+        {
+            SceneManager.LoadScene("Skeleton In Prison");
         }
     }
 }

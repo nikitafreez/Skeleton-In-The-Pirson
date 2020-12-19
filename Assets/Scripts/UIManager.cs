@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class UIManager : MonoBehaviour
 
     public Text coinText;
 
-    public GameObject pauseScreen, settingScreen;
+    public GameObject pauseScreen, settingScreen, levelScreen;
     public Slider musicVolSlider, sfxVolSlider;
 
     public void Awake()
@@ -61,7 +62,7 @@ public class UIManager : MonoBehaviour
 
     public void LevelClick()
     {
-
+        levelScreen.SetActive(true);
     }
 
     public void ExitClick()
@@ -76,6 +77,8 @@ public class UIManager : MonoBehaviour
     public void BackClick()
     {
         settingScreen.SetActive(false);
+        levelScreen.SetActive(false);
+
     }
 
     public void SetMusicLevel()
@@ -86,5 +89,15 @@ public class UIManager : MonoBehaviour
     public void SetSFXLevel()
     {
         AudioManager.instance.SetSFXLevel();
+    }
+
+    public void PrisonLvlClick()
+    {
+        SceneManager.LoadScene("Skeleton in Prison");
+    }
+    
+    public void MazeLvlClick()
+    {
+        SceneManager.LoadScene("DanganMaze");
     }
 }
