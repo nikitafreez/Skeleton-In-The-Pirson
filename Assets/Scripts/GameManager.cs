@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
         if (scene.name == "Boss1")
         {
-            AudioManager.instance.PlayMusic(8);
+            
         }
         else
         {
