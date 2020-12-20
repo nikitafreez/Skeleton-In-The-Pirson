@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject deathEffect;
 
     public ParticleSystem particle;
+    public bool isRespawning;
 
     public int currentCoins;
 
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
         Instantiate(deathEffect, PlayerController.instance.transform.position + new Vector3(0f, 1f, 0f), PlayerController.instance.transform.rotation);
 
         yield return new WaitForSeconds(1.5f);
+
+        isRespawning = true;
         UIManager.instance.fadeFromBlack = true;
         PlayerController.instance.transform.position = respawnPosition;
         CameraController.instance.theCMBrains.enabled = true;
@@ -105,7 +108,16 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator LevelEndCo()
     {
-        AudioManager.instance.PlayMusic(2);
+        Scene scene = SceneManager.GetActiveScene();
+
+        if (scene.name == "Boss1")
+        {
+            AudioManager.instance.PlayMusic(8);
+        }
+        else
+        {
+            AudioManager.instance.PlayMusic(2);
+        }
         PlayerController.instance.stopMove = true;
 
         yield return new WaitForSeconds(2f);
@@ -115,14 +127,18 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         Debug.Log("Level Ended");
 
-        Scene scene = SceneManager.GetActiveScene();
+
         if (scene.name == "Skeleton In Prison")
         {
             SceneManager.LoadScene("DanganMaze");
         }
         else if (scene.name == "DanganMaze")
         {
-            SceneManager.LoadScene("Skeleton In Prison");
+            SceneManager.LoadScene("Boss1");
+        }
+        else if (scene.name == "Boss1")
+        {
+
         }
     }
 }

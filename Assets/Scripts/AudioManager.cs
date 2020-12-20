@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -22,7 +23,16 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayMusic(0);
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "Boss1")
+        {
+            PlayMusic(8);
+        }
+        else
+        {
+            PlayMusic(0);
+        }
+
     }
 
     // Update is called once per frame

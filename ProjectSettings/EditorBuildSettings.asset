@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Skeleton In Prison.unity
     guid: 91d8b583d2c64b24dbe97a12c8c75603
+  - enabled: 1
+    path: Assets/Boss1.unity
+    guid: 39ed3b799c458ba479193e014912913e
   m_configObjects: {}
